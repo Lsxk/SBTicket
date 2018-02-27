@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lsxk.sbticket.dao.PathDao">
+    <!--为dao接口方法提供sql语句配置-->
+    <select id="queryAll" resultType="Path">
+        SELECT path_id, distance, time,source,distination
+        FROM t_path
+    </select>
+
+    <select id="queryPathBySite" resultType="Path" parameterType="long">
+        SELECT path_id, distance, time,source,distination
+        FROM t_path
+        WHERE source = #{sourceSiteId} AND distination = #{distSiteId}
+    </select>
+
+    <select id="queryById" resultType="Path" parameterType="long">
+        SELECT path_id, distance, time,source,distination
+        FROM t_path
+        WHERE path_id = #{pathId}
+    </select>
+
+    <insert id="insertPath" parameterType="Path">
+        INSERT INTO t_path (distance, time,source,distination)
+                VALUES (#{path.distance}, #{path.time}, #{path.sourceSiteId}, #{path.distSiteId})
+    </insert>
+</mapper>
