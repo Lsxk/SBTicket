@@ -6,7 +6,7 @@ package com.lsxk.sbticket.entity;
  */
 public class Path {
     /** 路线编号 */
-    private int pathNum;
+    private int pathId;
 
     /** 行驶距离 */
     private float distance;
@@ -14,9 +14,9 @@ public class Path {
     /** 行驶时间,单位：分 */
     private float time;
 
-    /** 起点 */
-    private String source;
+    /** 起始站点id */
+    private String sourceSiteId;
 
-    /** 终点 */
-    private String distination;
+    /** 目的地站点id */
+    private String distSiteId;
 }

@@ -5,8 +5,8 @@ CREATE TABLE t_path(
   `path_id` BIGINT NOT NULL AUTO_INCREMENT,
   `distance` FLOAT,
   `time` FLOAT,
-  `source` VARCHAR(20),
-  `distination` VARCHAR(20),
+  `source` INT,
+  `distination` INT,
 
   PRIMARY KEY (path_id)
 ) ENGINE = InnoDB AUTO_INCREMENT = 1000 DEFAULT CHARSET = utf8;
@@ -19,4 +19,11 @@ CREATE TABLE t_ticket(
   `departure` VARCHAR(30),
 
   PRIMARY KEY (ticket_id)
+) ENGINE = InnoDB AUTO_INCREMENT = 1000 DEFAULT CHARSET = utf8;
+
+CREATE TABLE t_site(
+  `site_id` BIGINT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(20),
+
+  PRIMARY KEY (site_id)
 ) ENGINE = InnoDB AUTO_INCREMENT = 1000 DEFAULT CHARSET = utf8;

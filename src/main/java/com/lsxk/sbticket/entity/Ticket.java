@@ -6,13 +6,13 @@ package com.lsxk.sbticket.entity;
  */
 public class Ticket {
     /** 路线编号*/
-    private int pathNum;
+    private int pathId;
 
     /** 票编号*/
-    private int TicketNum;
+    private int TicketId;
 
     /** 票总量*/
-    private int total;
+    private int num;
 
     /** 票价*/
     private int price;
