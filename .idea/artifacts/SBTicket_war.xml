@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="SBTicket:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="SBTicket.war">
+      <element id="artifact" artifact-name="SBTicket:war exploded" />
+    </root>
+  </artifact>
+</component>
