@@ -8,10 +8,26 @@ public class Site {
     /**
      * 站点id
      */
-    private int siteId;
+    private long siteId;
 
     /**
      * 站点名称
      */
     private String name;
+
+    public long getSiteId() {
+        return siteId;
+    }
+
+    public void setSiteId(long siteId) {
+        this.siteId = siteId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
