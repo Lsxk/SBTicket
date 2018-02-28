@@ -47,6 +47,7 @@ public class PathServiceImplTest {
 
     @Test
     public void getPathById() throws Exception {
+        System.out.println(pathService.getPathById(1000));
     }
 
     @Test
