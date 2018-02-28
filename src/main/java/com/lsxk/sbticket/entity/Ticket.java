@@ -17,8 +17,11 @@ public class Ticket {
     /** 票价*/
     private int price;
 
-    /** 出发时间，yyyy-mm-dd hh:mm*/
-    private String departure;
+    /** 出发时间，yyyy-mm-dd*/
+    private String date;
+
+    /** 出发时间 hh:mm*/
+    private String time;
 
     public long getPathId() {
         return pathId;
@@ -52,11 +55,31 @@ public class Ticket {
         this.price = price;
     }
 
-    public String getDeparture() {
-        return departure;
+    public String getDate() {
+        return date;
     }
 
-    public void setDeparture(String departure) {
-        this.departure = departure;
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    @Override
+    public String toString() {
+        return "Ticket{" +
+                "pathId=" + pathId +
+                ", TicketId=" + TicketId +
+                ", num=" + num +
+                ", price=" + price +
+                ", date='" + date + '\'' +
+                ", time='" + time + '\'' +
+                '}';
     }
 }

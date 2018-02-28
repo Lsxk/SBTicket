@@ -16,7 +16,8 @@ CREATE TABLE t_ticket(
   `ticket_id` BIGINT NOT NULL AUTO_INCREMENT,
   `num` INT,
   `price` INT,
-  `departure` VARCHAR(30),
+  `date` VARCHAR(30),
+  `time` VARCHAR(30),
 
   PRIMARY KEY (ticket_id)
 ) ENGINE = InnoDB AUTO_INCREMENT = 1000 DEFAULT CHARSET = utf8;
