@@ -5,11 +5,12 @@ package com.lsxk.sbticket.entity;
  * Created by wjz on 2018/2/27.
  */
 public class Ticket {
-    /** 路线编号*/
-    private long pathId;
 
     /** 票编号*/
     private long TicketId;
+
+    /** 路线编号*/
+    private long pathId;
 
     /** 票总量*/
     private int num;
@@ -74,8 +75,8 @@ public class Ticket {
     @Override
     public String toString() {
         return "Ticket{" +
-                "pathId=" + pathId +
-                ", TicketId=" + TicketId +
+                "TicketId=" + TicketId +
+                ", pathId=" + pathId +
                 ", num=" + num +
                 ", price=" + price +
                 ", date='" + date + '\'' +

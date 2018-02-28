@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lsxk.sbticket.dao.TicketDao">
+    <!--为dao接口方法提供sql语句配置-->
+    <select id="queryByDate" parameterType="String" resultType="Ticket">
+        SELECT ticket_id, path_id, num, price, date, time
+        FROM t_ticket
+        WHERE date = #{date}
+    </select>
+
+    <select id="queryByPathId" parameterType="long" resultType="Ticket">
+        SELECT ticket_id, path_id, num, price, date, time
+        FROM t_ticket
+        WHERE path_id = #{pathId}
+    </select>
+
+    <select id="queryByPathIdAndDate" resultType="Ticket">
+        SELECT ticket_id, path_id, num, price, date, time
+        FROM t_ticket
+        WHERE path_id = #{pathId} AND date = #{date}
+    </select>
+
+    <insert id="insertTicket" parameterType="Ticket">
+        INSERT INTO t_ticket (path_id, num, price, date, time)
+                VALUES (#{pathId}, #{num}, #{price}, #{date}, #{time})
+    </insert>
+</mapper>

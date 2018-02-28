@@ -12,8 +12,8 @@ CREATE TABLE t_path(
 ) ENGINE = InnoDB AUTO_INCREMENT = 1000 DEFAULT CHARSET = utf8;
 
 CREATE TABLE t_ticket(
-  `path_id` BIGINT NOT NULL,
   `ticket_id` BIGINT NOT NULL AUTO_INCREMENT,
+  `path_id` BIGINT NOT NULL,
   `num` INT,
   `price` INT,
   `date` VARCHAR(30),
