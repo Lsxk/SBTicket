@@ -55,8 +55,8 @@ public class PathServiceImplTest {
         Path path = new Path();
         path.setDistance(23);
         path.setTime(34);
-        path.setSourceSiteId(1l);
-        path.setDistSiteId(2l);
+        path.setSourceSiteId(1000);
+        path.setDistSiteId(1001);
 
         int i = pathService.addPath(path);
         System.out.println(i);

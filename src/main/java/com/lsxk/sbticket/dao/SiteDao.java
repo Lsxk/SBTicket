@@ -2,6 +2,8 @@ package com.lsxk.sbticket.dao;
 
 import com.lsxk.sbticket.entity.Site;
 
+import java.util.List;
+
 /**
  * t_site数据库交互层
  * Created by wjz on 2018/2/28.
@@ -21,6 +23,13 @@ public interface SiteDao {
      * @return 站点实体
      */
     Site queryByName(String name);
+
+    /**
+     * 通过校区查询
+     * @param campus 校区
+     * @return 站点列表
+     */
+    List<Site> queryByCampus(String campus);
 
     /**
      * 新增站点

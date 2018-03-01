@@ -55,16 +55,16 @@ public class TicketServiceImplTest {
     public void addTicket() throws Exception {
 
         Ticket ticket = new Ticket();
-        ticket.setPathId(1);
+        ticket.setPathId(1000);
         ticket.setNum(40);
-        ticket.setDate("2018-02-28");
-        ticket.setTime("08:00");
+        ticket.setDate("2018-02-29");
+        ticket.setTime("06:00");
         ticket.setPrice(4);
 
         Ticket ticket1 = new Ticket();
-        ticket1.setPathId(2);
+        ticket1.setPathId(1001);
         ticket1.setNum(40);
-        ticket1.setDate("2018-02-28");
+        ticket1.setDate("2018-02-29");
         ticket1.setTime("13:00");
         ticket1.setPrice(4);
 

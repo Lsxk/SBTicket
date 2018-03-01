@@ -25,6 +25,7 @@ CREATE TABLE t_ticket(
 CREATE TABLE t_site(
   `site_id` BIGINT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(20),
+  `campus` VARCHAR(10),
 
   PRIMARY KEY (site_id)
 ) ENGINE = InnoDB AUTO_INCREMENT = 1000 DEFAULT CHARSET = utf8;
