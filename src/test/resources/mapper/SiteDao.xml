@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lsxk.sbticket.dao.SiteDao">
+    <!--为dao接口方法提供sql语句配置-->
+    <select id="queryBySiteId" parameterType="long" resultType="Site">
+        SELECT site_id, name
+        FROM t_site
+        WHERE site_id = #{siteId}
+    </select>
+
+    <select id="queryByName" parameterType="String" resultType="Site">
+        SELECT site_id, name
+        FROM t_site
+        WHERE name = #{name}
+    </select>
+
+    <insert id="insertSite" parameterType="Site">
+        INSERT INTO t_site (name)
+                VALUES (#{name})
+    </insert>
+</mapper>
