@@ -12,10 +12,10 @@ public interface TicketService {
 
     /**
      * 通过路线查询票
-     * @param pathId 路线id
+     * @param pathIds 路线id
      * @return
      */
-    List<Ticket> getTicketByPathId(long pathId);
+    List<Ticket> getTicketByPathId(List<Long> pathIds);
 
     /**
      * 通过日期查询票
@@ -27,10 +27,10 @@ public interface TicketService {
     /**
      * 通过路线和出发时间查询票
      * @param date 格式：yyyy-mm-dd
-     * @param pathId 路线id
+     * @param pathIds 路线id
      * @return 票列表
      */
-    List<Ticket> getTicketByPathIdAndDate(long pathId, String date);
+    List<Ticket> getTicketByPathIdAndDate(List<Long> pathIds, String date);
 
     /**
      * 新增票

@@ -24,11 +24,11 @@ public class PathServiceImpl implements PathService {
         return pathDao.queryAll();
     }
 
-    public List<Path> getPathBySite(int sourceSiteId, int distSiteId) {
+    public List<Path> getPathBySite(long sourceSiteId, long distSiteId) {
         return pathDao.queryPathBySite(sourceSiteId, distSiteId);
     }
 
-    public Path getPathById(int pathId) {
+    public Path getPathById(long pathId) {
         return pathDao.queryById(pathId);
     }
 

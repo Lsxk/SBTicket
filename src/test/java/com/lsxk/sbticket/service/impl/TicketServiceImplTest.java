@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -26,7 +27,12 @@ public class TicketServiceImplTest {
 
     @Test
     public void getTicketByPathId() throws Exception {
-        List<Ticket> tickets = ticketService.getTicketByPathId(1l);
+
+        List<Long> pathIds = new ArrayList<Long>();
+        pathIds.add(1000L);
+        pathIds.add(1001L);
+
+        List<Ticket> tickets = ticketService.getTicketByPathId(pathIds);
 
         for (Ticket ticket: tickets) {
             System.out.println(ticket);

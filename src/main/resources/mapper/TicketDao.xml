@@ -10,16 +10,22 @@
         WHERE date = #{date}
     </select>
 
-    <select id="queryByPathId" parameterType="long" resultType="Ticket">
+    <select id="queryByPathId" parameterType="List" resultType="Ticket">
         SELECT ticket_id, path_id, num, price, date, time
         FROM t_ticket
-        WHERE path_id = #{pathId}
+        WHERE path_id IN
+              <foreach collection="list" item="item" open="(" close=")" separator=",">
+                  #{item}
+              </foreach>
     </select>
 
     <select id="queryByPathIdAndDate" resultType="Ticket">
         SELECT ticket_id, path_id, num, price, date, time
         FROM t_ticket
-        WHERE path_id = #{pathId} AND date = #{date}
+        WHERE date = #{date} AND path_id IN
+              <foreach collection="list" item="item" open="(" close=")" separator=",">
+                  #{item}
+              </foreach>
     </select>
 
     <insert id="insertTicket" parameterType="Ticket">

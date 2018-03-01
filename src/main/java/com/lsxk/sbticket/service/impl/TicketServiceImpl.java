@@ -19,16 +19,16 @@ public class TicketServiceImpl implements TicketService {
     @Autowired
     private TicketDao ticketDao;
 
-    public List<Ticket> getTicketByPathId(long pathId) {
-        return ticketDao.queryByPathId(pathId);
+    public List<Ticket> getTicketByPathId(List<Long> pathIds) {
+        return ticketDao.queryByPathId(pathIds);
     }
 
     public List<Ticket> getTicketByDate(String date) {
         return ticketDao.queryByDate(date);
     }
 
-    public List<Ticket> getTicketByPathIdAndDate(long pathId, String date) {
-        return ticketDao.queryByPathIdAndDate(pathId, date);
+    public List<Ticket> getTicketByPathIdAndDate(List<Long> pathIds, String date) {
+        return ticketDao.queryByPathIdAndDate(pathIds, date);
     }
 
     public int addTicket(Ticket ticket) {

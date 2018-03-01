@@ -21,14 +21,14 @@ public interface PathService {
      * @param distSiteId 目的地站点id
      * @return 站点列表
      */
-    List<Path> getPathBySite(int sourceSiteId, int distSiteId);
+    List<Path> getPathBySite(long sourceSiteId, long distSiteId);
 
     /**
      * 通过路线id查询路线
      * @param pathId 路线id
      * @return 路线对象
      */
-    Path getPathById(int pathId);
+    Path getPathById(long pathId);
 
     /**
      * 增加路线

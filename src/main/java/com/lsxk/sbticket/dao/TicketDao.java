@@ -20,18 +20,18 @@ public interface TicketDao {
 
     /**
      * 通过路线id查询
-     * @param pathId 路线id
+     * @param pathIds 路线id
      * @return 列表
      */
-    List<Ticket> queryByPathId(long pathId);
+    List<Ticket> queryByPathId(List<Long> pathIds);
 
     /**
      * 通过路线id和出发日期查询
-     * @param pathId 路线id
+     * @param pathIds 路线id
      * @param date 出发日期
      * @return 票列表
      */
-    List<Ticket> queryByPathIdAndDate(@Param("pathId") long pathId, @Param("date") String date);
+    List<Ticket> queryByPathIdAndDate(@Param("pathIds") List<Long> pathIds, @Param("date") String date);
 
     /**
      * 插入票
