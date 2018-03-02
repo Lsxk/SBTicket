@@ -11,6 +11,13 @@ import java.util.List;
 public interface TicketService {
 
     /**
+     * 通过id查询票
+     * @param ticketId 票id
+     * @return
+     */
+    Ticket getTicketById(long ticketId);
+
+    /**
      * 通过路线查询票
      * @param pathIds 路线id
      * @return
@@ -38,4 +45,12 @@ public interface TicketService {
      * @return 1为插入成功
      */
     int addTicket(Ticket ticket);
+
+    /**
+     * 减库存
+     * @param ticketId 票id
+     * @param count 数量
+     * @return boolean
+     */
+    boolean reduceTicket(long ticketId, int count);
 }

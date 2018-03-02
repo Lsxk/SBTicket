@@ -4,14 +4,21 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lsxk.sbticket.dao.TicketDao">
     <!--为dao接口方法提供sql语句配置-->
+
+    <select id="queryById" parameterType="long" resultType="Ticket">
+        SELECT ticket_id, path_id, num, price, date, time, balance
+        FROM t_ticket
+        WHERE ticket_id = #{ticketId}
+    </select>
+
     <select id="queryByDate" parameterType="String" resultType="Ticket">
-        SELECT ticket_id, path_id, num, price, date, time
+        SELECT ticket_id, path_id, num, price, date, time, balance
         FROM t_ticket
         WHERE date = #{date}
     </select>
 
     <select id="queryByPathId" parameterType="List" resultType="Ticket">
-        SELECT ticket_id, path_id, num, price, date, time
+        SELECT ticket_id, path_id, num, price, date, time, balance
         FROM t_ticket
         WHERE path_id IN
               <foreach collection="list" item="item" open="(" close=")" separator=",">
@@ -20,16 +27,22 @@
     </select>
 
     <select id="queryByPathIdAndDate" resultType="Ticket">
-        SELECT ticket_id, path_id, num, price, date, time
+        SELECT ticket_id, path_id, num, price, date, time, balance
         FROM t_ticket
         WHERE date = #{date} AND path_id IN
-              <foreach collection="list" item="item" open="(" close=")" separator=",">
+              <foreach collection="pathIds" item="item" open="(" close=")" separator=",">
                   #{item}
               </foreach>
     </select>
 
     <insert id="insertTicket" parameterType="Ticket">
-        INSERT INTO t_ticket (path_id, num, price, date, time)
-                VALUES (#{pathId}, #{num}, #{price}, #{date}, #{time})
+        INSERT INTO t_ticket (path_id, num, price, date, time, balance)
+                VALUES (#{pathId}, #{num}, #{price}, #{date}, #{time}, #{num})
     </insert>
+
+    <update id="reduceTicketNum">
+        UPDATE t_ticket SET
+            balance = balance - #{count}
+        WHERE ticket_id = #{ticketId}
+    </update>
 </mapper>

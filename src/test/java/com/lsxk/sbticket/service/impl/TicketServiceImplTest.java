@@ -50,7 +50,9 @@ public class TicketServiceImplTest {
 
     @Test
     public void getTicketByPathIdAndDate() throws Exception {
-        List<Ticket> tickets = ticketService.getTicketByPathIdAndDate(1, "2018-02-28");
+        List<Long> pathIds = new ArrayList<Long>();
+        pathIds.add(1000L);
+        List<Ticket> tickets = ticketService.getTicketByPathIdAndDate(pathIds, "2018-02-28");
 
         for (Ticket ticket: tickets) {
             System.out.println(ticket);
@@ -64,14 +66,14 @@ public class TicketServiceImplTest {
         ticket.setPathId(1000);
         ticket.setNum(40);
         ticket.setDate("2018-02-29");
-        ticket.setTime("06:00");
+        ticket.setTime("15:00");
         ticket.setPrice(4);
 
         Ticket ticket1 = new Ticket();
         ticket1.setPathId(1001);
         ticket1.setNum(40);
         ticket1.setDate("2018-02-29");
-        ticket1.setTime("13:00");
+        ticket1.setTime("17:00");
         ticket1.setPrice(4);
 
         ticketService.addTicket(ticket);

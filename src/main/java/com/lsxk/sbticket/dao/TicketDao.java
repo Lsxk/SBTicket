@@ -11,6 +11,8 @@ import java.util.List;
  */
 public interface TicketDao {
 
+    Ticket queryById(long ticketId);
+
     /**
      * 通过日期查询
      * @param date 格式:yyyy-mm-dd
@@ -39,4 +41,12 @@ public interface TicketDao {
      * @return 1为插入成功
      */
     int insertTicket(Ticket ticket);
+
+    /**
+     * 减少票库存
+     * @param ticketId 票id
+     * @param count 数量
+     * @return 1为成功
+     */
+    int reduceTicketNum(@Param("ticketId") long ticketId, @Param("count") int count);
 }

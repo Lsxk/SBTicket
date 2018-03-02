@@ -9,7 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
@@ -29,9 +31,10 @@ public class TicketController {
     @Autowired
     private PathService pathService;
 
-    @RequestMapping("/query")
+    @RequestMapping(value = "/{date}/{sourceSiteId}/{distSiteId}/query", method = RequestMethod.GET)
     @ResponseBody
-    public TicketResult query(String date, long sourceSiteId, long distSiteId) {
+    public TicketResult query(@PathVariable("date") String date, @PathVariable("sourceSiteId") long sourceSiteId,
+                              @PathVariable("distSiteId") long distSiteId) {
 
         TicketResult<List<Ticket>> ticketResult;
 

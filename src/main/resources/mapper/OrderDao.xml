@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lsxk.sbticket.dao.OrderDao">
+    <!--为dao接口方法提供sql语句配置-->
+    <select id="queryById" parameterType="String" resultType="Order">
+        SELECT order_id, ticket_id, order_uid, order_time, total_price, order_status
+        FROM t_order
+        WHERE order_id = #{orderId}
+    </select>
+    
+    <insert id="insertOrder" parameterType="Order">
+        INSERT INTO t_order (order_id, ticket_id, order_uid, order_time, total_price, order_status)
+                VALUES (#{orderId}, #{ticketId}, #{orderUid}, #{orderTime}, #{totalPrice}, #{orderStatus})
+    </insert>
+    
+    <update id="updateOrder" parameterType="Order">
+        UPDATE t_order SET
+            ticket_id = #{ticketId},
+            order_uid = #{orderUid},
+            order_time = #{orderTime},
+            total_price = #{totalPrice},
+            order_status = #{orderStatus}
+        WHERE order_id = #{orderId}
+    </update>
+</mapper>

@@ -19,6 +19,10 @@ public class TicketServiceImpl implements TicketService {
     @Autowired
     private TicketDao ticketDao;
 
+    public Ticket getTicketById(long ticketId) {
+        return ticketDao.queryById(ticketId);
+    }
+
     public List<Ticket> getTicketByPathId(List<Long> pathIds) {
         return ticketDao.queryByPathId(pathIds);
     }
@@ -33,5 +37,14 @@ public class TicketServiceImpl implements TicketService {
 
     public int addTicket(Ticket ticket) {
         return ticketDao.insertTicket(ticket);
+    }
+
+    public boolean reduceTicket(long ticketId, int count) {
+
+        if (ticketDao.reduceTicketNum(ticketId, count) == 1) {
+            return true;
+        }
+
+        return false;
     }
 }

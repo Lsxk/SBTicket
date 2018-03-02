@@ -24,13 +24,8 @@ public class Ticket {
     /** 出发时间 hh:mm*/
     private String time;
 
-    public long getPathId() {
-        return pathId;
-    }
-
-    public void setPathId(long pathId) {
-        this.pathId = pathId;
-    }
+    /** 票余量*/
+    private int balance;
 
     public long getTicketId() {
         return TicketId;
@@ -38,6 +33,14 @@ public class Ticket {
 
     public void setTicketId(long ticketId) {
         TicketId = ticketId;
+    }
+
+    public long getPathId() {
+        return pathId;
+    }
+
+    public void setPathId(long pathId) {
+        this.pathId = pathId;
     }
 
     public int getNum() {
@@ -72,6 +75,14 @@ public class Ticket {
         this.time = time;
     }
 
+    public int getBalance() {
+        return balance;
+    }
+
+    public void setBalance(int balance) {
+        this.balance = balance;
+    }
+
     @Override
     public String toString() {
         return "Ticket{" +
@@ -81,6 +92,7 @@ public class Ticket {
                 ", price=" + price +
                 ", date='" + date + '\'' +
                 ", time='" + time + '\'' +
+                ", balance=" + balance +
                 '}';
     }
 }

@@ -18,6 +18,7 @@ CREATE TABLE t_ticket(
   `price` INT,
   `date` VARCHAR(30),
   `time` VARCHAR(30),
+  `balance` INT,
 
   PRIMARY KEY (ticket_id)
 ) ENGINE = InnoDB AUTO_INCREMENT = 1000 DEFAULT CHARSET = utf8;
@@ -29,3 +30,14 @@ CREATE TABLE t_site(
 
   PRIMARY KEY (site_id)
 ) ENGINE = InnoDB AUTO_INCREMENT = 1000 DEFAULT CHARSET = utf8;
+
+CREATE TABLE t_order(
+  `order_id` VARCHAR(50) NOT NULL,
+  `ticket_id` BIGINT,
+  `order_uid` VARCHAR(100),
+  `order_time` VARCHAR(30),
+  `total_price` FLOAT,
+  `order_status` INT,
+
+  PRIMARY KEY (order_id)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8;
