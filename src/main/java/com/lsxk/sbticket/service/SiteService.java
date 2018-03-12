@@ -32,6 +32,12 @@ public interface SiteService {
     List<Site> getSiteByCampus(String campus);
 
     /**
+     * 查询所有的站点
+     * @return 站点列表
+     */
+    List<Site> getAllSite();
+
+    /**
      * 新增站点
      * @param site 站点
      * @return 1为新增成功

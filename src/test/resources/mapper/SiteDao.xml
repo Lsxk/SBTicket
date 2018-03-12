@@ -22,6 +22,11 @@
         WHERE campus = #{campus}
     </select>
 
+    <select id="queryAll" resultType="Site">
+        SELECT site_id, name, campus
+        FROM t_site
+    </select>
+
     <insert id="insertSite" parameterType="Site">
         INSERT INTO t_site (name, campus)
                 VALUES (#{name}, #{campus})

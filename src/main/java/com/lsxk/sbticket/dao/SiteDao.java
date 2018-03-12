@@ -32,6 +32,12 @@ public interface SiteDao {
     List<Site> queryByCampus(String campus);
 
     /**
+     * 查询所有的站点
+     * @return 站点列表
+     */
+    List<Site> queryAll();
+
+    /**
      * 新增站点
      * @param site 站点实体
      * @return 1为插入成功

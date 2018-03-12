@@ -3,7 +3,6 @@ package com.lsxk.sbticket.web;
 import com.lsxk.sbticket.dto.TicketResult;
 import com.lsxk.sbticket.entity.Path;
 import com.lsxk.sbticket.entity.Ticket;
-import com.lsxk.sbticket.service.PathService;
 import com.lsxk.sbticket.service.TicketService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

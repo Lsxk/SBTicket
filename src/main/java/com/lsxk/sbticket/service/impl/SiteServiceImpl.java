@@ -31,6 +31,10 @@ public class SiteServiceImpl implements SiteService {
         return siteDao.queryByCampus(campus);
     }
 
+    public List<Site> getAllSite() {
+        return siteDao.queryAll();
+    }
+
     public int addSite(Site site) {
         return siteDao.insertSite(site);
     }

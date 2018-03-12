@@ -1,7 +1,6 @@
 package com.lsxk.sbticket.service.impl;
 
 import com.lsxk.sbticket.entity.Path;
-import com.lsxk.sbticket.service.PathService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -11,8 +10,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 /**
  * PathService测试类
