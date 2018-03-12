@@ -28,11 +28,8 @@ public class TicketServiceImplTest {
     @Test
     public void getTicketByPathId() throws Exception {
 
-        List<Long> pathIds = new ArrayList<Long>();
-        pathIds.add(1000L);
-        pathIds.add(1001L);
 
-        List<Ticket> tickets = ticketService.getTicketByPathId(pathIds);
+        List<Ticket> tickets = ticketService.getTicketBySiteId(1000l, 1001l);
 
         for (Ticket ticket: tickets) {
             System.out.println(ticket);
@@ -50,9 +47,7 @@ public class TicketServiceImplTest {
 
     @Test
     public void getTicketByPathIdAndDate() throws Exception {
-        List<Long> pathIds = new ArrayList<Long>();
-        pathIds.add(1000L);
-        List<Ticket> tickets = ticketService.getTicketByPathIdAndDate(pathIds, "2018-02-28");
+        List<Ticket> tickets = ticketService.getTicketBySiteIdAndDate(1000l, 1001l, "2018-02-28");
 
         for (Ticket ticket: tickets) {
             System.out.println(ticket);
@@ -63,17 +58,23 @@ public class TicketServiceImplTest {
     public void addTicket() throws Exception {
 
         Ticket ticket = new Ticket();
-        ticket.setPathId(1000);
+        ticket.setSourId(1000);
+        ticket.setDistId(1001);
         ticket.setNum(40);
-        ticket.setDate("2018-02-29");
+        ticket.setDate("2018-03-12");
         ticket.setTime("15:00");
+        ticket.setDistance(10);
+        ticket.setLasting(42);
         ticket.setPrice(4);
 
         Ticket ticket1 = new Ticket();
-        ticket1.setPathId(1001);
+        ticket1.setSourId(1000);
+        ticket1.setDistId(1001);
         ticket1.setNum(40);
-        ticket1.setDate("2018-02-29");
+        ticket1.setDate("2018-03-12");
         ticket1.setTime("17:00");
+        ticket1.setDistance(10);
+        ticket1.setLasting(42);
         ticket1.setPrice(4);
 
         ticketService.addTicket(ticket);
