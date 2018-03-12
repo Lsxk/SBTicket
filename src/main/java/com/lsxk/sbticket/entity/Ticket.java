@@ -9,8 +9,11 @@ public class Ticket {
     /** 票编号*/
     private long TicketId;
 
-    /** 路线编号*/
-    private long pathId;
+    /** 出发站点id*/
+    private long sourId;
+
+    /** 目的站点id*/
+    private long distId;
 
     /** 票总量*/
     private int num;
@@ -24,6 +27,12 @@ public class Ticket {
     /** 出发时间 hh:mm*/
     private String time;
 
+    /** 路程，单位km*/
+    private float distance;
+
+    /** 耗时,单位min*/
+    private float lasting;
+
     /** 票余量*/
     private int balance;
 
@@ -35,12 +44,20 @@ public class Ticket {
         TicketId = ticketId;
     }
 
-    public long getPathId() {
-        return pathId;
+    public long getSourId() {
+        return sourId;
     }
 
-    public void setPathId(long pathId) {
-        this.pathId = pathId;
+    public void setSourId(long sourId) {
+        this.sourId = sourId;
+    }
+
+    public long getDistId() {
+        return distId;
+    }
+
+    public void setDistId(long distId) {
+        this.distId = distId;
     }
 
     public int getNum() {
@@ -75,6 +92,22 @@ public class Ticket {
         this.time = time;
     }
 
+    public float getDistance() {
+        return distance;
+    }
+
+    public void setDistance(float distance) {
+        this.distance = distance;
+    }
+
+    public float getLasting() {
+        return lasting;
+    }
+
+    public void setLasting(float lasting) {
+        this.lasting = lasting;
+    }
+
     public int getBalance() {
         return balance;
     }
@@ -87,11 +120,14 @@ public class Ticket {
     public String toString() {
         return "Ticket{" +
                 "TicketId=" + TicketId +
-                ", pathId=" + pathId +
+                ", sourId=" + sourId +
+                ", distId=" + distId +
                 ", num=" + num +
                 ", price=" + price +
                 ", date='" + date + '\'' +
                 ", time='" + time + '\'' +
+                ", distance=" + distance +
+                ", lasting=" + lasting +
                 ", balance=" + balance +
                 '}';
     }

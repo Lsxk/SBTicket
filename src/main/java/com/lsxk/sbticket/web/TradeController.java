@@ -31,8 +31,6 @@ public class TradeController {
     @Autowired
     private TicketService ticketService;
     @Autowired
-    private PathService pathService;
-    @Autowired
     private SiteService siteService;
     @Autowired
     private TradeService tradeService;
@@ -52,9 +50,8 @@ public class TradeController {
         String orderTime;
 
         Ticket ticket = ticketService.getTicketById(ticketId);
-        Path path = pathService.getPathById(ticket.getPathId());
-        Site sourceSite = siteService.getSiteById(path.getSourceSiteId());
-        Site distSite = siteService.getSiteById(path.getDistSiteId());
+        Site sourceSite = siteService.getSiteById(ticket.getSourId());
+        Site distSite = siteService.getSiteById(ticket.getDistId());
 
         try {
             orderTime = System.currentTimeMillis() + "";

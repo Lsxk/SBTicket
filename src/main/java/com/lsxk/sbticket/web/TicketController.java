@@ -27,8 +27,6 @@ public class TicketController {
 
     @Autowired
     private TicketService ticketService;
-    @Autowired
-    private PathService pathService;
 
     @RequestMapping(value = "/{date}/{sourceSiteId}/{distSiteId}/query", method = RequestMethod.GET)
     @ResponseBody
@@ -37,18 +35,8 @@ public class TicketController {
 
         TicketResult<List<Ticket>> ticketResult;
 
-        /** 查询路线
-         * 先通过出发站点和目的站点查询线路列表
-         * 再通过线路列表查询票列表
-         * */
         try {
-            List<Path> paths = pathService.getPathBySite(sourceSiteId, distSiteId);
-            List<Long> pathIds = new ArrayList<Long>();
-            for (Path path: paths) {
-                pathIds.add(path.getPathId());
-            }
-
-            List<Ticket> tickets = ticketService.getTicketByPathIdAndDate(pathIds, date);
+            List<Ticket> tickets = ticketService.getTicketBySiteIdAndDate(sourceSiteId, distSiteId, date);
 
             ticketResult = new TicketResult<List<Ticket>>(true, tickets);
 

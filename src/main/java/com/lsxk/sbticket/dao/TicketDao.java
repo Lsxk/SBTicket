@@ -21,19 +21,21 @@ public interface TicketDao {
     List<Ticket> queryByDate(String date);
 
     /**
-     * 通过路线id查询
-     * @param pathIds 路线id
-     * @return 列表
+     * 根据站点id查询
+     * @param sourId 出发站点id
+     * @param distId 目的站点id
+     * @return 票列表
      */
-    List<Ticket> queryByPathId(List<Long> pathIds);
+    List<Ticket> queryBySiteId(@Param("sourId") long sourId, @Param("distId") long distId);
 
     /**
      * 通过路线id和出发日期查询
-     * @param pathIds 路线id
+     * @param sourId 出发站点id
+     * @param distId 目的站点id
      * @param date 出发日期
      * @return 票列表
      */
-    List<Ticket> queryByPathIdAndDate(@Param("pathIds") List<Long> pathIds, @Param("date") String date);
+    List<Ticket> queryBySiteIdAndDate(@Param("sourId") long sourId, @Param("distId") long distId, @Param("date") String date);
 
     /**
      * 插入票
