@@ -1,8 +1,9 @@
 package com.lsxk.sbticket.web;
 
+import com.lsxk.sbticket.dto.TicketDTO;
 import com.lsxk.sbticket.dto.TicketResult;
-import com.lsxk.sbticket.entity.Path;
 import com.lsxk.sbticket.entity.Ticket;
+import com.lsxk.sbticket.service.SiteService;
 import com.lsxk.sbticket.service.TicketService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,22 +28,45 @@ public class TicketController {
 
     @Autowired
     private TicketService ticketService;
+    @Autowired
+    private SiteService siteService;
 
     @RequestMapping(value = "/{date}/{sourceSiteId}/{distSiteId}/query", method = RequestMethod.GET)
     @ResponseBody
     public TicketResult query(@PathVariable("date") String date, @PathVariable("sourceSiteId") long sourceSiteId,
                               @PathVariable("distSiteId") long distSiteId) {
 
-        TicketResult<List<Ticket>> ticketResult;
+        TicketResult<List<TicketDTO>> ticketResult;
+        List<TicketDTO> ticketDTOS = new ArrayList<TicketDTO>();
+        TicketDTO ticketDTO;
 
         try {
             List<Ticket> tickets = ticketService.getTicketBySiteIdAndDate(sourceSiteId, distSiteId, date);
+            for (Ticket ticket: tickets) {
+                ticketDTO = new TicketDTO();
+                if (ticket.getBalance() > 0) {
+                    ticketDTO.setTicketId(ticket.getTicketId());
+                    ticketDTO.setSourName(siteService.getSiteById(ticket.getSourId()).getName());
+                    ticketDTO.setDistName(siteService.getSiteById(ticket.getDistId()).getName());
+                    ticketDTO.setDate(ticket.getDate());
+                    ticketDTO.setTime(ticket.getTime());
+                    ticketDTO.setDistance(ticket.getDistance());
+                    ticketDTO.setLasting(ticket.getLasting());
+                    ticketDTO.setPrice(ticket.getPrice());
+                    ticketDTO.setBalance(ticket.getBalance());
 
-            ticketResult = new TicketResult<List<Ticket>>(true, tickets);
+                    ticketDTOS.add(ticketDTO);
+                }
+            }
+            if (ticketDTOS.size() > 0) {
+                ticketResult = new TicketResult<List<TicketDTO>>(true, ticketDTOS);
+            } else {
+                ticketResult = new TicketResult<List<TicketDTO>>(false, "没有查询到班次");
+            }
 
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
-            ticketResult = new TicketResult<List<Ticket>>(false, e.getMessage());
+            ticketResult = new TicketResult<List<TicketDTO>>(false, e.getMessage());
         }
 
         return ticketResult;

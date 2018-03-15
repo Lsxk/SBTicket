@@ -6,7 +6,7 @@
     <!--为dao接口方法提供sql语句配置-->
 
     <select id="queryById" parameterType="long" resultType="Ticket">
-        SELECT ticket_id, path_id, num, price, date, time, balance
+        SELECT ticket_id, sour_id, dist_id, num, price, date, time, distance, lasting, balance
         FROM t_ticket
         WHERE ticket_id = #{ticketId}
     </select>

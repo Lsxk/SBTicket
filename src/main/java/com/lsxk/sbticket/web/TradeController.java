@@ -1,5 +1,6 @@
 package com.lsxk.sbticket.web;
 
+import com.lsxk.sbticket.dto.TicketResult;
 import com.lsxk.sbticket.entity.Order;
 import com.lsxk.sbticket.entity.Path;
 import com.lsxk.sbticket.entity.Site;
@@ -12,10 +13,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,6 +39,23 @@ public class TradeController {
     private TradeService tradeService;
     @Autowired
     private OrderService orderService;
+
+    @RequestMapping(value = "/{ticketId}/{count}/queryTotalPrice")
+    @ResponseBody
+    public TicketResult<Object> queryTotalPrice(@PathVariable("ticketId") long ticketId, @PathVariable("count") int count) {
+        TicketResult<Object> totalPriceResult;
+        try {
+            Ticket ticket = ticketService.getTicketById(ticketId);
+            int price = ticket.getPrice() * count;
+            Object totalPrice = new DecimalFormat("##0.00").format(price);
+            totalPriceResult = new TicketResult<Object>(true, totalPrice);
+        } catch (Exception e) {
+            totalPriceResult = new TicketResult<Object>(false, "获取价格失败");
+            logger.error(e.getMessage());
+        }
+
+        return totalPriceResult;
+    }
 
     @RequestMapping("/pay")
     @ResponseBody
