@@ -34,3 +34,13 @@ CREATE TABLE t_order(
 
   PRIMARY KEY (order_id)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+
+CREATE TABLE t_queryRecord(
+  `record_id` BIGINT NOT NULL AUTO_INCREMENT,
+  `sour_id` BIGINT NOT NULL,
+  `dist_id` BIGINT NOT NULL,
+  `date` VARCHAR(30),
+  `time` VARCHAR(30),
+  `query_time` VARCHAR(50),
+  PRIMARY KEY (record_id)
+) ENGINE = InnoDB AUTO_INCREMENT = 1000 DEFAULT CHARSET = utf8;

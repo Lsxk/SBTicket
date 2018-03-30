@@ -2,7 +2,9 @@ package com.lsxk.sbticket.web;
 
 import com.lsxk.sbticket.dto.TicketDTO;
 import com.lsxk.sbticket.dto.TicketResult;
+import com.lsxk.sbticket.entity.QueryRecord;
 import com.lsxk.sbticket.entity.Ticket;
+import com.lsxk.sbticket.service.QueryRecordService;
 import com.lsxk.sbticket.service.SiteService;
 import com.lsxk.sbticket.service.TicketService;
 import org.slf4j.Logger;
@@ -13,7 +15,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +31,8 @@ public class TicketController {
     private TicketService ticketService;
     @Autowired
     private SiteService siteService;
+    @Autowired
+    private QueryRecordService queryRecordService;
 
     @RequestMapping(value = "/{date}/{sourceSiteId}/{distSiteId}/query", method = RequestMethod.GET)
     @ResponseBody
@@ -61,6 +64,15 @@ public class TicketController {
     @ResponseBody
     public TicketResult queryByDateAndTime(@PathVariable("date") String date, @PathVariable("time") String time, @PathVariable("sourceSiteId") long sourceSiteId,
                                     @PathVariable("distSiteId") long distSiteId) {
+
+        // 添加查询记录
+        QueryRecord queryRecord = new QueryRecord();
+        queryRecord.setDate(date);
+        queryRecord.setTime(time);
+        queryRecord.setSourId(sourceSiteId);
+        queryRecord.setDistId(distSiteId);
+        queryRecord.setQueryTime(new java.text.SimpleDateFormat("yyyy-mm-dd hh:mm").format(new java.util.Date()));
+        queryRecordService.addRecord(queryRecord);
 
         TicketResult<List<TicketDTO>> ticketResult;
         List<TicketDTO> ticketDTOS = new ArrayList<TicketDTO>();
