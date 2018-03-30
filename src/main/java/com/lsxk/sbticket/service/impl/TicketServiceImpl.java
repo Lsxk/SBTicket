@@ -35,6 +35,10 @@ public class TicketServiceImpl implements TicketService {
         return ticketDao.queryBySiteIdAndDate(sourId, distId, date);
     }
 
+    public List<Ticket> getTicketBySiteIdAndDateAndTime(long sourId, long distId, String date, String time) {
+        return ticketDao.queryBySiteIdAndDateAndTime(sourId, distId, date, time);
+    }
+
     public int addTicket(Ticket ticket) {
         return ticketDao.insertTicket(ticket);
     }

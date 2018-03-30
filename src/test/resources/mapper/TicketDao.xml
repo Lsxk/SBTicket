@@ -29,6 +29,12 @@
         WHERE date = #{date} AND sour_id = #{sourId} AND dist_id = #{distId}
     </select>
 
+    <select id="queryBySiteIdAndDateAndTime" resultType="Ticket">
+        SELECT ticket_id, sour_id, dist_id, num, price, date, time, distance, lasting, balance
+        FROM t_ticket
+        WHERE date = #{date} AND time = #{time} AND sour_id = #{sourId} AND dist_id = #{distId}
+    </select>
+
     <insert id="insertTicket" parameterType="Ticket">
         INSERT INTO t_ticket (sour_id, dist_id, num, price, date, time, distance, lasting, balance)
                 VALUES (#{sourId}, #{distId}, #{num}, #{price}, #{date}, #{time}, #{distance}, #{lasting}, #{num})

@@ -38,6 +38,17 @@ public interface TicketDao {
     List<Ticket> queryBySiteIdAndDate(@Param("sourId") long sourId, @Param("distId") long distId, @Param("date") String date);
 
     /**
+     * 通过路线id和出发日期查询
+     * @param sourId 出发站点id
+     * @param distId 目的站点id
+     * @param date 出发日期
+     * @param time 出发时间
+     * @return 票列表
+     */
+    List<Ticket> queryBySiteIdAndDateAndTime(@Param("sourId") long sourId, @Param("distId") long distId,
+                                             @Param("date") String date, @Param("time") String time);
+
+    /**
      * 插入票
      * @param ticket 票
      * @return 1为插入成功

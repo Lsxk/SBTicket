@@ -33,31 +33,14 @@ public class TicketController {
 
     @RequestMapping(value = "/{date}/{sourceSiteId}/{distSiteId}/query", method = RequestMethod.GET)
     @ResponseBody
-    public TicketResult query(@PathVariable("date") String date, @PathVariable("sourceSiteId") long sourceSiteId,
+    public TicketResult queryByDate(@PathVariable("date") String date, @PathVariable("sourceSiteId") long sourceSiteId,
                               @PathVariable("distSiteId") long distSiteId) {
 
         TicketResult<List<TicketDTO>> ticketResult;
         List<TicketDTO> ticketDTOS = new ArrayList<TicketDTO>();
-        TicketDTO ticketDTO;
-
         try {
             List<Ticket> tickets = ticketService.getTicketBySiteIdAndDate(sourceSiteId, distSiteId, date);
-            for (Ticket ticket: tickets) {
-                ticketDTO = new TicketDTO();
-                if (ticket.getBalance() > 0) {
-                    ticketDTO.setTicketId(ticket.getTicketId());
-                    ticketDTO.setSourName(siteService.getSiteById(ticket.getSourId()).getName());
-                    ticketDTO.setDistName(siteService.getSiteById(ticket.getDistId()).getName());
-                    ticketDTO.setDate(ticket.getDate());
-                    ticketDTO.setTime(ticket.getTime());
-                    ticketDTO.setDistance(ticket.getDistance());
-                    ticketDTO.setLasting(ticket.getLasting());
-                    ticketDTO.setPrice(ticket.getPrice());
-                    ticketDTO.setBalance(ticket.getBalance());
-
-                    ticketDTOS.add(ticketDTO);
-                }
-            }
+            filterTickets(ticketDTOS, tickets);
             if (ticketDTOS.size() > 0) {
                 ticketResult = new TicketResult<List<TicketDTO>>(true, ticketDTOS);
             } else {
@@ -72,4 +55,49 @@ public class TicketController {
         return ticketResult;
     }
 
+
+
+    @RequestMapping(value = "/{date}/{time}/{sourceSiteId}/{distSiteId}/query", method = RequestMethod.GET)
+    @ResponseBody
+    public TicketResult queryByDateAndTime(@PathVariable("date") String date, @PathVariable("time") String time, @PathVariable("sourceSiteId") long sourceSiteId,
+                                    @PathVariable("distSiteId") long distSiteId) {
+
+        TicketResult<List<TicketDTO>> ticketResult;
+        List<TicketDTO> ticketDTOS = new ArrayList<TicketDTO>();
+        try {
+            List<Ticket> tickets = ticketService.getTicketBySiteIdAndDateAndTime(sourceSiteId, distSiteId, date, time);
+            filterTickets(ticketDTOS, tickets);
+            if (ticketDTOS.size() > 0) {
+                ticketResult = new TicketResult<List<TicketDTO>>(true, ticketDTOS);
+            } else {
+                ticketResult = new TicketResult<List<TicketDTO>>(false, "没有查询到班次");
+            }
+
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            ticketResult = new TicketResult<List<TicketDTO>>(false, e.getMessage());
+        }
+
+        return ticketResult;
+    }
+
+    private void filterTickets(List<TicketDTO> ticketDTOS, List<Ticket> tickets) {
+        TicketDTO ticketDTO;
+        for (Ticket ticket: tickets) {
+            ticketDTO = new TicketDTO();
+            if (ticket.getBalance() > 0) {
+                ticketDTO.setTicketId(ticket.getTicketId());
+                ticketDTO.setSourName(siteService.getSiteById(ticket.getSourId()).getName());
+                ticketDTO.setDistName(siteService.getSiteById(ticket.getDistId()).getName());
+                ticketDTO.setDate(ticket.getDate());
+                ticketDTO.setTime(ticket.getTime());
+                ticketDTO.setDistance(ticket.getDistance());
+                ticketDTO.setLasting(ticket.getLasting());
+                ticketDTO.setPrice(ticket.getPrice());
+                ticketDTO.setBalance(ticket.getBalance());
+
+                ticketDTOS.add(ticketDTO);
+            }
+        }
+    }
 }

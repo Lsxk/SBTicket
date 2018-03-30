@@ -42,6 +42,16 @@ public interface TicketService {
     List<Ticket> getTicketBySiteIdAndDate(long sourId, long distId, String date);
 
     /**
+     * 通过路线和出发时间查询票
+     * @param sourId 出发站id
+     * @param distId 目的地id
+     * @param date 格式：yyyy-mm-dd
+     * @param time 格式：hh:mm
+     * @return 票列表
+     */
+    List<Ticket> getTicketBySiteIdAndDateAndTime(long sourId, long distId, String date, String time);
+
+    /**
      * 新增票
      * @param ticket 票实体
      * @return 1为插入成功

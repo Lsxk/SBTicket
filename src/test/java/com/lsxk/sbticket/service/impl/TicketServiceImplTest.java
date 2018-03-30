@@ -55,6 +55,14 @@ public class TicketServiceImplTest {
     }
 
     @Test
+    public void getTicketByPathIdAndDateAndTime() throws Exception {
+        List<Ticket> tickets = ticketService.getTicketBySiteIdAndDateAndTime(1000l, 1001l, "2018-03-30", "06:00");
+
+        for (Ticket ticket: tickets) {
+            System.out.println(ticket);
+        }
+    }
+    @Test
     public void addTicket() throws Exception {
 
         Ticket ticket = new Ticket();
