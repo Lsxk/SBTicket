@@ -4,8 +4,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lsxk.sbticket.dao.QueryRecordDao">
     <!--为dao接口方法提供sql语句配置-->
-    <insert id="insertOrder" parameterType="Order">
-        INSERT INTO t_order (sour_id, dist_id, date, time, query_time)
+    <insert id="insertRecord" parameterType="QueryRecord">
+        INSERT INTO t_queryrecord (sour_id, dist_id, date, time, query_time)
         VALUES (#{sourId}, #{distId}, #{date}, #{time}, #{queryTime})
     </insert>
 </mapper>

@@ -35,7 +35,7 @@ CREATE TABLE t_order(
   PRIMARY KEY (order_id)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
-CREATE TABLE t_queryRecord(
+CREATE TABLE t_queryrecord(
   `record_id` BIGINT NOT NULL AUTO_INCREMENT,
   `sour_id` BIGINT NOT NULL,
   `dist_id` BIGINT NOT NULL,
