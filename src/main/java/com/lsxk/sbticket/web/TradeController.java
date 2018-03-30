@@ -2,7 +2,6 @@ package com.lsxk.sbticket.web;
 
 import com.lsxk.sbticket.dto.TicketResult;
 import com.lsxk.sbticket.entity.Order;
-import com.lsxk.sbticket.entity.Path;
 import com.lsxk.sbticket.entity.Site;
 import com.lsxk.sbticket.entity.Ticket;
 import com.lsxk.sbticket.exception.ParamException;
