@@ -26,10 +26,10 @@ public class TicketServiceImplTest {
     private TicketService ticketService;
 
     @Test
-    public void getTicketByPathId() throws Exception {
+    public void getTicketBySiteIdAndDate() throws Exception {
 
 
-        List<Ticket> tickets = ticketService.getTicketBySiteId(1000l, 1001l);
+        List<Ticket> tickets = ticketService.getTicketBySiteIdAndDate(1000, 1001, "2018-04-03");
 
         for (Ticket ticket: tickets) {
             System.out.println(ticket);

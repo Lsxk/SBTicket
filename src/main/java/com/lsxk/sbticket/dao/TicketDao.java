@@ -11,6 +11,14 @@ import java.util.List;
  */
 public interface TicketDao {
 
+    List<Ticket> queryByBusScheduleIdAndDate(@Param("list") List<Long> busScheduleId, @Param("date") String date);
+
+    /**
+     * 批量插入
+     * @param ticketList 票列表
+     * @return 插入成功的个数
+     */
+    int insertTicketList(List<Ticket> ticketList);
     Ticket queryById(long ticketId);
 
     /**

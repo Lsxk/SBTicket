@@ -45,7 +45,7 @@ public class TradeController {
         TicketResult<Object> totalPriceResult;
         try {
             Ticket ticket = ticketService.getTicketById(ticketId);
-            int price = ticket.getPrice() * count;
+            float price = ticket.getPrice() * count;
             Object totalPrice = new DecimalFormat("##0.00").format(price);
             totalPriceResult = new TicketResult<Object>(true, totalPrice);
         } catch (Exception e) {

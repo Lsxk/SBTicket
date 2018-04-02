@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lsxk.sbticket.dao.BusScheduleDao">
+    <!--为dao接口方法提供sql语句配置-->
+
+    <select id="queryBySiteIdAndDate" resultType="BusSchedule">
+        SELECT bus_schedule_id, sour_id, dist_id, num, price, date, time, distance, lasting, type
+        FROM t_bus_schedule
+        WHERE date = #{date} AND sour_id = #{sourId} AND dist_id = #{distId}
+    </select>
+
+    <select id="queryBySiteIdAndDateAndTime" resultType="BusSchedule">
+        SELECT bus_schedule_id, sour_id, dist_id, num, price, date, time, distance, lasting, type
+        FROM t_bus_schedule
+        WHERE date = #{date} AND time = #{time} AND sour_id = #{sourId} AND dist_id = #{distId}
+    </select>
+
+    <select id="queryBusScheduleByDate" parameterType="String" resultType="BusSchedule">
+        SELECT bus_schedule_id, sour_id, dist_id, num, price, date, time, distance, lasting, type
+        FROM t_bus_schedule
+        WHERE date = #{date}
+    </select>
+
+    <!--keyProperty="userId" useGeneratedKeys="true"配置可自动装配对象的id-->
+    <insert id="insertBusSchedule" parameterType="BusSchedule" keyProperty="busScheduleId" useGeneratedKeys="true">
+        INSERT INTO t_bus_schedule (sour_id, dist_id, num, price, date, time, distance, lasting, type)
+        VALUES (#{sourId}, #{distId}, #{num}, #{price}, #{date}, #{time}, #{distance}, #{lasting}, #{type})
+    </insert>
+</mapper>

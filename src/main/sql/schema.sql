@@ -3,7 +3,8 @@ USE db_sbticket;
 
 CREATE TABLE t_ticket(
   `ticket_id` BIGINT NOT NULL AUTO_INCREMENT,
-  `source_id` BIGINT,
+  `bus_schedule_id` BIGINT NOT NULL,
+  `sour_id` BIGINT,
   `dist_id` BIGINT,
   `num` INT,
   `price` INT,
@@ -13,7 +14,8 @@ CREATE TABLE t_ticket(
   `lasting` FLOAT,
   `balance` INT,
 
-  PRIMARY KEY (ticket_id)
+  PRIMARY KEY (ticket_id),
+  KEY `bdindex` (`bus_schedule_id`,`date`)
 ) ENGINE = InnoDB AUTO_INCREMENT = 1000 DEFAULT CHARSET = utf8;
 
 CREATE TABLE t_site(
@@ -43,4 +45,18 @@ CREATE TABLE t_queryrecord(
   `time` VARCHAR(30),
   `query_time` VARCHAR(50),
   PRIMARY KEY (record_id)
+) ENGINE = InnoDB AUTO_INCREMENT = 1000 DEFAULT CHARSET = utf8;
+
+CREATE TABLE t_bus_schedule(
+  `bus_schedule_id` BIGINT NOT NULL AUTO_INCREMENT,
+  `sour_id` BIGINT,
+  `dist_id` BIGINT,
+  `num` INT,
+  `price` FLOAT,
+  `date` VARCHAR(30),
+  `time` VARCHAR(30),
+  `distance` FLOAT,
+  `lasting` FLOAT,
+  `type` INT,
+  PRIMARY KEY (bus_schedule_id)
 ) ENGINE = InnoDB AUTO_INCREMENT = 1000 DEFAULT CHARSET = utf8;

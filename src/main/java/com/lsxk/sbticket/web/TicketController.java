@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,19 +38,21 @@ public class TicketController {
     @RequestMapping(value = "/{date}/{sourceSiteId}/{distSiteId}/query", method = RequestMethod.GET)
     @ResponseBody
     public TicketResult queryByDate(@PathVariable("date") String date, @PathVariable("sourceSiteId") long sourceSiteId,
-                              @PathVariable("distSiteId") long distSiteId) {
+                                    @PathVariable("distSiteId") long distSiteId) {
 
         TicketResult<List<TicketDTO>> ticketResult;
         List<TicketDTO> ticketDTOS = new ArrayList<TicketDTO>();
+
         try {
             List<Ticket> tickets = ticketService.getTicketBySiteIdAndDate(sourceSiteId, distSiteId, date);
+
             filterTickets(ticketDTOS, tickets);
+
             if (ticketDTOS.size() > 0) {
                 ticketResult = new TicketResult<List<TicketDTO>>(true, ticketDTOS);
             } else {
                 ticketResult = new TicketResult<List<TicketDTO>>(false, "没有查询到班次");
             }
-
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
             ticketResult = new TicketResult<List<TicketDTO>>(false, e.getMessage());
@@ -59,11 +62,11 @@ public class TicketController {
     }
 
 
-
     @RequestMapping(value = "/{date}/{time}/{sourceSiteId}/{distSiteId}/query", method = RequestMethod.GET)
     @ResponseBody
     public TicketResult queryByDateAndTime(@PathVariable("date") String date, @PathVariable("time") String time, @PathVariable("sourceSiteId") long sourceSiteId,
-                                    @PathVariable("distSiteId") long distSiteId) {
+                                           @PathVariable("distSiteId") long distSiteId) {
+
 
         // 添加查询记录
         QueryRecord queryRecord = new QueryRecord();
@@ -71,7 +74,7 @@ public class TicketController {
         queryRecord.setTime(time);
         queryRecord.setSourId(sourceSiteId);
         queryRecord.setDistId(distSiteId);
-        queryRecord.setQueryTime(new java.text.SimpleDateFormat("yyyy-mm-dd hh:mm").format(new java.util.Date()));
+        queryRecord.setQueryTime(new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm").format(new java.util.Date()));
         queryRecordService.addRecord(queryRecord);
 
         TicketResult<List<TicketDTO>> ticketResult;
@@ -94,10 +97,9 @@ public class TicketController {
     }
 
     private void filterTickets(List<TicketDTO> ticketDTOS, List<Ticket> tickets) {
-        TicketDTO ticketDTO;
-        for (Ticket ticket: tickets) {
-            ticketDTO = new TicketDTO();
+        for (Ticket ticket : tickets) {
             if (ticket.getBalance() > 0) {
+                TicketDTO ticketDTO = new TicketDTO();
                 ticketDTO.setTicketId(ticket.getTicketId());
                 ticketDTO.setSourName(siteService.getSiteById(ticket.getSourId()).getName());
                 ticketDTO.setDistName(siteService.getSiteById(ticket.getDistId()).getName());

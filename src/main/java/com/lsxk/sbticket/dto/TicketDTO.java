@@ -6,7 +6,7 @@ package com.lsxk.sbticket.dto;
  */
 public class TicketDTO {
     /** 票编号*/
-    private long TicketId;
+    private long ticketId;
 
     /** 出发站点*/
     private String sourName;
@@ -15,7 +15,7 @@ public class TicketDTO {
     private String distName;
 
     /** 票价*/
-    private int price;
+    private float price;
 
     /** 出发时间，yyyy-mm-dd*/
     private String date;
@@ -33,11 +33,11 @@ public class TicketDTO {
     private int balance;
 
     public long getTicketId() {
-        return TicketId;
+        return ticketId;
     }
 
     public void setTicketId(long ticketId) {
-        TicketId = ticketId;
+        this.ticketId = ticketId;
     }
 
     public String getSourName() {
@@ -56,11 +56,11 @@ public class TicketDTO {
         this.distName = distName;
     }
 
-    public int getPrice() {
+    public float getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 
@@ -102,5 +102,20 @@ public class TicketDTO {
 
     public void setBalance(int balance) {
         this.balance = balance;
+    }
+
+    @Override
+    public String toString() {
+        return "TicketDTO{" +
+                "ticketId=" + ticketId +
+                ", sourName='" + sourName + '\'' +
+                ", distName='" + distName + '\'' +
+                ", price=" + price +
+                ", date='" + date + '\'' +
+                ", time='" + time + '\'' +
+                ", distance=" + distance +
+                ", lasting=" + lasting +
+                ", balance=" + balance +
+                '}';
     }
 }

@@ -1,14 +1,10 @@
 package com.lsxk.sbticket.entity;
 
 /**
- * 车票实体
- * Created by wjz on 2018/2/27.
+ * 校车班次实体
+ * Created by wjz on 2018/4/1.
  */
-public class Ticket {
-
-    /** 票编号*/
-    private long TicketId;
-
+public class BusSchedule {
     /** 班次编号*/
     private long busScheduleId;
 
@@ -18,7 +14,7 @@ public class Ticket {
     /** 目的站点id*/
     private long distId;
 
-    /** 票总量*/
+    /** 班次总量*/
     private int num;
 
     /** 票价*/
@@ -36,15 +32,15 @@ public class Ticket {
     /** 耗时,单位min*/
     private float lasting;
 
-    /** 票余量*/
-    private int balance;
+    /** 班次类型 1：固定班次，2：临时班次*/
+    private int type;
 
-    public long getTicketId() {
-        return TicketId;
+    public long getBusScheduleId() {
+        return busScheduleId;
     }
 
-    public void setTicketId(long ticketId) {
-        TicketId = ticketId;
+    public void setBusScheduleId(long busScheduleId) {
+        this.busScheduleId = busScheduleId;
     }
 
     public long getSourId() {
@@ -111,27 +107,18 @@ public class Ticket {
         this.lasting = lasting;
     }
 
-    public int getBalance() {
-        return balance;
+    public int getType() {
+        return type;
     }
 
-    public void setBalance(int balance) {
-        this.balance = balance;
-    }
-
-    public long getBusScheduleId() {
-        return busScheduleId;
-    }
-
-    public void setBusScheduleId(long busScheduleId) {
-        this.busScheduleId = busScheduleId;
+    public void setType(int type) {
+        this.type = type;
     }
 
     @Override
     public String toString() {
-        return "Ticket{" +
-                "TicketId=" + TicketId +
-                ", busScheduleId=" + busScheduleId +
+        return "BusSchedule{" +
+                "busScheduleId=" + busScheduleId +
                 ", sourId=" + sourId +
                 ", distId=" + distId +
                 ", num=" + num +
@@ -140,7 +127,7 @@ public class Ticket {
                 ", time='" + time + '\'' +
                 ", distance=" + distance +
                 ", lasting=" + lasting +
-                ", balance=" + balance +
+                ", type=" + type +
                 '}';
     }
 }

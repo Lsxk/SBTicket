@@ -11,6 +11,21 @@ import java.util.List;
 public interface TicketService {
 
     /**
+     * 根据班次id和出发时间查询票
+     * @param busScheduleId 班次id
+     * @param date 出发日期
+     * @return 票列表
+     */
+    List<Ticket> getTicketByBusScheduleIdAndDate(List<Long> busScheduleId, String date);
+
+    /**
+     * 批量插入
+     * @param tickets
+     * @return
+     */
+    int addTicketList(List<Ticket> tickets);
+
+    /**
      * 通过id查询票
      * @param ticketId 票id
      * @return

@@ -6,6 +6,7 @@ import com.lsxk.sbticket.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,6 +19,15 @@ public class TicketServiceImpl implements TicketService {
 
     @Autowired
     private TicketDao ticketDao;
+
+    public List<Ticket> getTicketByBusScheduleIdAndDate(List<Long> busScheduleId, String date) {
+        List<Ticket> tickets = ticketDao.queryByBusScheduleIdAndDate(busScheduleId, date);
+        return filterTickets(tickets);
+    }
+
+    public int addTicketList(List<Ticket> tickets) {
+        return ticketDao.insertTicketList(tickets);
+    }
 
     public Ticket getTicketById(long ticketId) {
         return ticketDao.queryById(ticketId);
@@ -50,5 +60,16 @@ public class TicketServiceImpl implements TicketService {
         }
 
         return false;
+    }
+
+
+    private List<Ticket> filterTickets(List<Ticket> tickets) {
+        List<Ticket> ticketList = new ArrayList<Ticket>();
+        for (Ticket ticket: tickets) {
+            if (ticket.getBalance() > 0) {
+                ticketList.add(ticket);
+            }
+        }
+        return ticketList;
     }
 }
