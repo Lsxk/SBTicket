@@ -1,7 +1,7 @@
 package com.lsxk.sbticket.entity;
 
 /**
- * 封装查询校车票记录
+ * 封装前端查询校车票记录
  * Created by wjz on 2018/3/30.
  */
 public class QueryRecord {
@@ -17,7 +17,7 @@ public class QueryRecord {
     /** 出发日期*/
     private String date;
 
-    /** 出发时间*/
+    /** 出发时间 : all表示查询全天*/
     private String time;
 
     /** 查询时间*/

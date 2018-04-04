@@ -23,9 +23,33 @@
         WHERE date = #{date}
     </select>
 
+    <select id="queryBusSchedules" resultType="BusSchedule">
+        SELECT bus_schedule_id, sour_id, dist_id, num, price, date, time, distance, lasting, type
+        FROM t_bus_schedule
+    </select>
+
+
     <!--keyProperty="userId" useGeneratedKeys="true"配置可自动装配对象的id-->
     <insert id="insertBusSchedule" parameterType="BusSchedule" keyProperty="busScheduleId" useGeneratedKeys="true">
         INSERT INTO t_bus_schedule (sour_id, dist_id, num, price, date, time, distance, lasting, type)
         VALUES (#{sourId}, #{distId}, #{num}, #{price}, #{date}, #{time}, #{distance}, #{lasting}, #{type})
     </insert>
+
+    <delete id="deleteBusSchedule">
+        DELETE FROM t_bus_schedule WHERE bus_schedule_id = #{busScheduleId}
+    </delete>
+
+    <update id="updateBusSchedule" parameterType="BusSchedule">
+        UPDATE t_bus_schedule SET
+        <if test="sourId != null and sourId != '' and sourId != 0">sour_id = #{sourId},</if>
+        <if test="distId != null and distId != '' and distId != 0">dist_id = #{distId},</if>
+        <if test="num != null and num != '' and num != 0">num = #{num},</if>
+        <if test="price != null and price != '' and price != 0">price = #{price},</if>
+        <if test="date != null and date != ''">date = #{date},</if>
+        <if test="time != null and time != ''">time = #{time},</if>
+        <if test="distance != null and distance != '' and distance != 0">distance = #{distance},</if>
+        <if test="lasting != null and lasting != '' and lasting != 0">lasting = #{lasting},</if>
+        <if test="type != null and type != '' and type != 0">type = #{type}</if>
+        WHERE bus_schedule_id = #{busScheduleId}
+    </update>
 </mapper>

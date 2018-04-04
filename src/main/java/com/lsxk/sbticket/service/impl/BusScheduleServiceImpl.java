@@ -68,6 +68,10 @@ public class BusScheduleServiceImpl implements BusScheduleService {
         return busScheduleDao.queryBusScheduleByDate(date);
     }
 
+    public List<BusSchedule> getBusSchedules() {
+        return busScheduleDao.queryBusSchedules();
+    }
+
     public int addBusSchedule(BusSchedule busSchedule) throws ParamException {
         int num = busScheduleDao.insertBusSchedule(busSchedule);
         if (num == 1) {
@@ -113,5 +117,13 @@ public class BusScheduleServiceImpl implements BusScheduleService {
         }
 
         return num;
+    }
+
+    public int deleteBusSchedule(long busScheduleId) {
+        return busScheduleDao.deleteBusSchedule(busScheduleId);
+    }
+
+    public int modifyBusSchedule(BusSchedule busSchedule) {
+        return busScheduleDao.updateBusSchedule(busSchedule);
     }
 }

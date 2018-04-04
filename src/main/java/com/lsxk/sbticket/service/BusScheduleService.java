@@ -41,9 +41,30 @@ public interface BusScheduleService {
     List<BusSchedule> getBusScheduleByDate(String date);
 
     /**
+     * 查出全部班次
+     * @return 班次列表
+     */
+    List<BusSchedule> getBusSchedules();
+
+    /**
      * 新增班次,同时增加一周的票
      * @param busSchedule 班次实体
      * @return 1为成功
      */
     int addBusSchedule(BusSchedule busSchedule) throws ParamException;
+
+
+    /**
+     * 删除班次
+     * @param busScheduleId
+     * @return
+     */
+    int deleteBusSchedule(long busScheduleId);
+
+    /**
+     * 修改班次
+     * @param busSchedule 班次
+     * @return 1为成功
+     */
+    int modifyBusSchedule(BusSchedule busSchedule);
 }

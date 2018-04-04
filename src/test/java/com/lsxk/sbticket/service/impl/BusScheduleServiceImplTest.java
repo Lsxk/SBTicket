@@ -46,4 +46,10 @@ public class BusScheduleServiceImplTest {
         busScheduleService.addBusSchedule(busSchedule);
     }
 
+    @Test
+    public void deleteBusSchedule() {
+        long busScheduleId = 1200;
+        System.out.println("删除个数：" + busScheduleService.deleteBusSchedule(busScheduleId));
+    }
+
 }

@@ -39,9 +39,29 @@ public interface BusScheduleDao {
     List<BusSchedule> queryBusScheduleByDate(String date);
 
     /**
+     * 查询全部班次
+     * @return 班次列表
+     */
+    List<BusSchedule> queryBusSchedules();
+
+    /**
      * 插入班次
      * @param busSchedule 班次
      * @return 1为插入成功
      */
     int insertBusSchedule(BusSchedule busSchedule);
+
+    /**
+     * 删除班次
+     * @param busScheduleId id
+     * @return
+     */
+    int deleteBusSchedule(long busScheduleId);
+
+    /**
+     * 更新班次
+     * @param busSchedule
+     * @return 1为更新成功
+     */
+    int updateBusSchedule(BusSchedule busSchedule);
 }
