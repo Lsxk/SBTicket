@@ -1,9 +1,11 @@
 package com.lsxk.sbticket.web;
 
+import com.lsxk.sbticket.dto.PaySaPi;
 import com.lsxk.sbticket.dto.TicketResult;
 import com.lsxk.sbticket.entity.Order;
 import com.lsxk.sbticket.entity.Site;
 import com.lsxk.sbticket.entity.Ticket;
+import com.lsxk.sbticket.enums.OrderStateEnum;
 import com.lsxk.sbticket.exception.ParamException;
 import com.lsxk.sbticket.service.*;
 import com.lsxk.sbticket.util.PayUtil;
@@ -14,9 +16,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
@@ -52,14 +56,14 @@ public class TradeController {
             totalPriceResult = new TicketResult<Object>(false, "获取价格失败");
             logger.error(e.getMessage());
         }
-
         return totalPriceResult;
     }
 
-    @RequestMapping("/pay")
+    @RequestMapping(value = "/pay", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> pay(HttpServletRequest request, String orderUid, long ticketId, int count, int istype) {
+    public TicketResult<Map<String, Object>> pay(HttpServletRequest request, String orderUid, long ticketId, int count, int istype) {
 
+        TicketResult<Map<String, Object>> ticketResult;
         Map<String, Object> resultMap = new HashMap<String, Object>();
         Map<String, Object> remoteMap = new HashMap<String, Object>();
 
@@ -88,33 +92,53 @@ public class TradeController {
             remoteMap.put("goodsname", goodsName);
             resultMap.put("data", PayUtil.payOrder(remoteMap));
 
-            /**
-             * 订单入库，此时还未付款成功
-             */
-            Order order = new Order();
-            order.setOrderId(orderId);
-            order.setOrderUid(orderUid);
-            order.setOrderTime(orderTime);
-            order.setTicketId(ticketId);
-            order.setTotalPrice(Float.valueOf(price));
-            order.setOrderStatus(0);
-
-            orderService.addOrder(order);
-
+            ticketResult = new TicketResult<Map<String, Object>>(true, resultMap);
             /**
              * 减库存
              */
 
-            ticketService.reduceTicket(ticketId, count);
-
-
+            if (ticketService.reduceTicket(ticketId, count)) {
+                /**
+                 * 订单入库，此时还未付款成功
+                 */
+                Order order = new Order();
+                order.setOrderId(orderId);
+                order.setOrderUid(orderUid);
+                order.setOrderTime(orderTime);
+                order.setTicketId(ticketId);
+                order.setTotalPrice(Float.valueOf(price));
+                order.setOrderStatus(OrderStateEnum.UNPAID.getState());
+                orderService.addOrder(order);
+            } else {
+                // 查询库存
+                ticketResult = new TicketResult<Map<String, Object>>(false, "已卖完");
+            }
         } catch (ParamException e) {
+            ticketResult = new TicketResult<Map<String, Object>>(false, "参数错误");
             e.printStackTrace();
         }
+        return ticketResult;
+    }
 
-
-
-
-        return resultMap;
+    @RequestMapping(value = "/notifyPay", method = RequestMethod.POST)
+    public void notifyPay(HttpServletRequest request, HttpServletResponse response, PaySaPi paySaPi) {
+        // 保证密钥一致性
+        if (PayUtil.checkPayKey(paySaPi)) {
+            // 更新订单状态
+            Order order = new Order();
+            order.setOrderId(paySaPi.getOrderid());
+            order.setOrderStatus(OrderStateEnum.PAID.getState());
+            if (orderService.updateOrder(order) == 1) {
+                logger.info("付款成功"+ order.getOrderId());
+            }
+        } else {
+            Order order = new Order();
+            order.setOrderId(paySaPi.getOrderid());
+            order.setOrderStatus(OrderStateEnum.CANCEL.getState());
+            orderService.updateOrder(order);
+            if (orderService.updateOrder(order) == 1) {
+                logger.info("付款失败，已取消订单"+ order.getOrderId());
+            }
+        }
     }
 }

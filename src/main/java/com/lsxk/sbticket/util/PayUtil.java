@@ -2,7 +2,8 @@ package com.lsxk.sbticket.util;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
+import com.lsxk.sbticket.dto.PaySaPi;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,7 +12,7 @@ import org.slf4j.LoggerFactory;
  */
 public class PayUtil {
 
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	private static final Logger logger = LoggerFactory.getLogger(PayUtil.class);
 
 	public static String UID = "xxxxxxxxxxxx";
 
@@ -63,16 +64,31 @@ public class PayUtil {
 		return MD5Util.encryption(key);
 	}
 
-
-
-	public static String getOrderIdByUUId() {
-		int machineId = 1;// 最大支持1-9个集群机器部署
-		int hashCodeV = UUID.randomUUID().toString().hashCode();
-		if (hashCodeV < 0) {// 有可能是负数
-			hashCodeV = -hashCodeV;
+	public static boolean checkPayKey(PaySaPi paySaPi) {
+		String key = "";
+		if (!StringUtils.isBlank(paySaPi.getOrderid())) {
+			logger.info("支付回来的订单号：" + paySaPi.getOrderid());
+			key += paySaPi.getOrderid();
 		}
-		// 0 代表前面补充0;d 代表参数为正数型
-		return machineId + String.format("%01d", hashCodeV);
+		if (!StringUtils.isBlank(paySaPi.getOrderuid())) {
+			logger.info("支付回来的支付记录的ID：" + paySaPi.getOrderuid());
+			key += paySaPi.getOrderuid();
+		}
+		if (!StringUtils.isBlank(paySaPi.getPaysapi_id())) {
+			logger.info("支付回来的平台订单号：" + paySaPi.getPaysapi_id());
+			key += paySaPi.getPaysapi_id();
+		}
+		if (!StringUtils.isBlank(paySaPi.getPrice())) {
+			logger.info("支付回来的价格：" + paySaPi.getPrice());
+			key += paySaPi.getPrice();
+		}
+		if (!StringUtils.isBlank(paySaPi.getRealprice())) {
+			logger.info("支付回来的真实价格：" + paySaPi.getRealprice());
+			key += paySaPi.getRealprice();
+		}
+		logger.info("支付回来的Key：" + paySaPi.getKey());
+		key += TOKEN;
+		logger.info("我们自己拼接的Key：" + MD5Util.encryption(key));
+		return paySaPi.getKey().equals(MD5Util.encryption(key));
 	}
-
 }

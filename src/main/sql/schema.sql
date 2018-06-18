@@ -14,8 +14,7 @@ CREATE TABLE t_ticket(
   `lasting` FLOAT,
   `balance` INT,
 
-  PRIMARY KEY (ticket_id),
-  KEY `bdindex` (`bus_schedule_id`,`date`)
+  PRIMARY KEY (ticket_id)
 ) ENGINE = InnoDB AUTO_INCREMENT = 1000 DEFAULT CHARSET = utf8;
 
 CREATE TABLE t_site(
@@ -28,6 +27,7 @@ CREATE TABLE t_site(
 
 CREATE TABLE t_order(
   `order_id` VARCHAR(50) NOT NULL,
+  `paysapi_id` VARCHAR(30),
   `ticket_id` BIGINT,
   `order_uid` VARCHAR(100),
   `order_time` VARCHAR(30),

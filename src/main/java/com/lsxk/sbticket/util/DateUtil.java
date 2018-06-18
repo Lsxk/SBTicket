@@ -5,7 +5,6 @@ import com.lsxk.sbticket.exception.ParamException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  * Created by wjz on 2018/4/1.
@@ -38,12 +37,12 @@ public class DateUtil {
     }
 
     /**
-     * 得到未来几天的日期字符串
+     * 得到未来或以前几天的日期字符串
      * @param date yyyy-MM-dd
-     * @param days 天数
+     * @param days 天数，负数表示以前
      * @return yyyy-MM-dd
      */
-    public static String getFetureDate(String date, int days) throws ParamException {
+    public static String getDurationDate(String date, int days) throws ParamException {
         String fetureDate;
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Calendar c = Calendar.getInstance();

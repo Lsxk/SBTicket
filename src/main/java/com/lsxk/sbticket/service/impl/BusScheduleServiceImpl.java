@@ -94,7 +94,7 @@ public class BusScheduleServiceImpl implements BusScheduleService {
                         ticket.setLasting(busSchedule.getLasting());
                         ticket.setPrice(busSchedule.getPrice());
                         ticket.setBusScheduleId(busSchedule.getBusScheduleId());
-                        ticket.setDate(DateUtil.getFetureDate(date, i));
+                        ticket.setDate(DateUtil.getDurationDate(date, i));
 
                         ticketList.add(ticket);
                     }

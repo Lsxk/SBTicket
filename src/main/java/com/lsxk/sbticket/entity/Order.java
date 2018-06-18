@@ -9,6 +9,9 @@ public class Order {
     /** 订单编号*/
     private String orderId;
 
+    /** paysapi订单编号*/
+    private String paysapiId;
+
     /** 票id*/
     private long ticketId;
 
@@ -21,12 +24,16 @@ public class Order {
     /** 订单总价*/
     private float totalPrice;
 
-    /** 订单状态
-     * 0：未付款
-     * 1：已付款
-     * 2：退款中
-     * */
+    /** 订单状态*/
     private int orderStatus;
+
+    public String getPaysapiId() {
+        return paysapiId;
+    }
+
+    public void setPaysapiId(String paysapiId) {
+        this.paysapiId = paysapiId;
+    }
 
     public String getOrderId() {
         return orderId;

@@ -21,7 +21,8 @@
     <!--映射路径：“/”-->
     <!--静态资源配置-->
     <mvc:default-servlet-handler/>
-
+    <!--扫描web下的bean-->
+    <context:component-scan base-package="com.lsxk.sbticket.web"/>
 
     <!--配置jsp 显示viewResolver-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -30,8 +31,7 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
-    <!--扫描web下的bean-->
-    <context:component-scan base-package="com.lsxk.sbticket.web"/>
+
 
 
 

@@ -17,11 +17,12 @@
     
     <update id="updateOrder" parameterType="Order">
         UPDATE t_order SET
-            ticket_id = #{ticketId},
-            order_uid = #{orderUid},
-            order_time = #{orderTime},
-            total_price = #{totalPrice},
-            order_status = #{orderStatus}
+          <if test="paysapiId != null and paysapiId != ''">paysapi_id = #{paysapiId},</if>
+          <if test="ticketId != null and ticketId != '' and ticketId != 0">ticket_id = #{ticketId},</if>
+          <if test="orderUid != null and orderUid != ''">order_uid = #{orderUid},</if>
+          <if test="orderTime != null and orderTime != ''">order_time = #{orderTime},</if>
+          <if test="totalPrice != null and totalPrice != '' and totalPrice != 0">total_price = #{totalPrice},</if>
+          <if test="orderStatus != null and orderStatus != '' and orderStatus != 0">order_status = #{orderStatus},</if>
         WHERE order_id = #{orderId}
     </update>
 </mapper>

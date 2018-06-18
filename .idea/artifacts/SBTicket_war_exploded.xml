@@ -10,7 +10,7 @@
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.21" />
           <element id="library" level="project" name="Maven: ch.qos.logback:logback-core:1.2.3" />
           <element id="library" level="project" name="Maven: ch.qos.logback:logback-classic:1.2.3" />
-          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:6.0.6" />
+          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.26" />
           <element id="library" level="project" name="Maven: com.mchange:c3p0:0.9.5.2" />
           <element id="library" level="project" name="Maven: com.mchange:mchange-commons-java:0.2.11" />
           <element id="library" level="project" name="Maven: org.mybatis:mybatis:3.4.4" />
@@ -33,6 +33,7 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:4.3.9.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-test:4.3.9.RELEASE" />
           <element id="library" level="project" name="Maven: org.apache.commons:commons-lang3:3.4" />
+          <element id="library" level="project" name="Maven: org.jsoup:jsoup:1.11.2" />
         </element>
       </element>
       <element id="directory" name="META-INF">

@@ -89,4 +89,9 @@ public class TicketServiceImplTest {
         ticketService.addTicket(ticket1);
     }
 
+    @Test
+    public void reduceTicket() {
+        ticketService.reduceTicket(1061L, 1);
+    }
+
 }

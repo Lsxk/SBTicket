@@ -8,4 +8,10 @@
         INSERT INTO t_order (sour_id, dist_id, date, time, query_time)
         VALUES (#{sourId}, #{distId}, #{date}, #{time}, #{queryTime})
     </insert>
+
+    <select id="queryRecord" resultType="QueryRecord">
+        SELECT record_id, sour_id, dist_id, date, time, query_time
+        FROM t_queryrecord
+        WHERE sour_id = #{sourId} AND dist_id = #{distId}
+    </select>
 </mapper>

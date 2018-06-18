@@ -55,7 +55,7 @@ public class ScheduleToTicketTask {
                     ticket.setLasting(busSchedule.getLasting());
                     ticket.setPrice(busSchedule.getPrice());
                     ticket.setBusScheduleId(busSchedule.getBusScheduleId());
-                    ticket.setDate(DateUtil.getFetureDate(date, DAY_INTERVAL));
+                    ticket.setDate(DateUtil.getDurationDate(date, DAY_INTERVAL));
 
                     tickets.add(ticket);
                 }

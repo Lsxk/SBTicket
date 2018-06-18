@@ -53,7 +53,7 @@ public class BusScheduleController {
 
     @RequestMapping(value = "/getBusSchedules", method = RequestMethod.GET)
     @ResponseBody
-    public TicketResult<List<BusScheduleDTO>> getBusSchedules() {
+    public TicketResult<List<BusScheduleDTO>> getALL() {
         TicketResult<List<BusScheduleDTO>> ticketResult;
         try {
             List<BusSchedule> busSchedules = busScheduleService.getBusSchedules();

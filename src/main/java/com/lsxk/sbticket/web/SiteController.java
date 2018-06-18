@@ -8,10 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -38,6 +35,21 @@ public class SiteController {
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
             ticketResult = new TicketResult<List<Site>>(false, e.getMessage());
+        }
+        return ticketResult;
+    }
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @ResponseBody
+    public TicketResult addSite(@ModelAttribute("form") Site site) {
+        TicketResult ticketResult;
+        try {
+            if (siteService.addSite(site) == 1) {
+                ticketResult = new TicketResult(true, "插入成功");
+            } else {
+                ticketResult = new TicketResult(false, "插入失败");
+            }
+        } catch (Exception e) {
+            ticketResult = new TicketResult(false, "系统错误");
         }
         return ticketResult;
     }

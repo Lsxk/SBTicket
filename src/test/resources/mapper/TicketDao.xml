@@ -56,10 +56,10 @@
                 VALUES (#{busScheduleId}, #{sourId}, #{distId}, #{num}, #{price}, #{date}, #{time}, #{distance}, #{lasting}, #{num})
     </insert>
 
-
+    <!--行级锁-->
     <update id="reduceTicketNum">
         UPDATE t_ticket SET
             balance = balance - #{count}
-        WHERE ticket_id = #{ticketId}
+        WHERE ticket_id = #{ticketId} AND <![CDATA[ (balance - #{count})>= 0 ]]>
     </update>
 </mapper>
